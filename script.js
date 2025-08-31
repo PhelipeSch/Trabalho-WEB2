@@ -1,10 +1,10 @@
 let numeros = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-let especiais = ["!","@","#","$","%","¨","&","*","(",")","_","+","=","-","{","}","[","]",";",":","'","<",">",",",".","?","/","|","^","~","`"];
+let especiais = ["!", "@", "#", "$", "%", "¨", "&", "*", "(", ")", "_", "+", "=", "-", "{", "}", "[", "]", ";", ":", "'", "<", ">", ",", ".", "?", "/", "|", "^", "~", "`"];
 
 let formulario = document.getElementById("formulario");
 
 // Validar todos os campos do formulário
-formulario.addEventListener("submit", function(event) {
+formulario.addEventListener("submit", function (event) {
   let nomeValido = validarNome();
   let enderecoValido = validarEndereco();
   let telefoneValido = validarTelefone();
@@ -61,6 +61,7 @@ function validarNome() {
     nome.setAttribute("class", "erro");
     return false;
   } else {
+
     // Verifica se contém números
     for (let i = 0; i < nome.value.length; i++) {
       if (numeros.includes(nome.value[i])) {
@@ -95,6 +96,7 @@ function validarNome() {
     Cidade, Bairro e rua não podem ser vazios
     Cidade, Bairro e rua não podem conter números
  */
+
 function validarEndereco() {
   let cidade = document.getElementById("cidade");
   let bairro = document.getElementById("bairro");
@@ -209,31 +211,31 @@ function validarEmail() {
     Deve ter 11 dígitos
 */
 function validarCPF() {
-    let cpf = document.getElementById("CPF");
+  let cpf = document.getElementById("CPF");
 
-    // Verifica se está vazio
-    if (cpf.value.length == 0) {
-        cpf.setAttribute("class", "erro");
-        return false;
+  // Verifica se está vazio
+  if (cpf.value.length == 0) {
+    cpf.setAttribute("class", "erro");
+    return false;
+  }
+
+  // Verifica se contém apenas números
+  for (let i = 0; i < cpf.value.length; i++) {
+    if (!numeros.includes(cpf.value[i])) {
+      cpf.setAttribute("class", "erro");
+      return false;
     }
+  }
 
-    // Verifica se contém apenas números
-    for (let i = 0; i < cpf.value.length; i++) {
-        if (!numeros.includes(cpf.value[i])) {
-            cpf.setAttribute("class", "erro");
-            return false;
-        }
-    }
+  // Verifica se tem 11 dígitos
+  if (cpf.value.length != 11) {
+    cpf.setAttribute("class", "erro");
+    return false;
+  }
 
-    // Verifica se tem 11 dígitos
-    if (cpf.value.length != 11) {
-        cpf.setAttribute("class", "erro");
-        return false;
-    }
-
-    // Tudo certo
-    cpf.setAttribute("class", "correto");
-    return true;
+  // Tudo certo
+  cpf.setAttribute("class", "correto");
+  return true;
 }
 
 /*

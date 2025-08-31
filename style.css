@@ -1,26 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 :root {
     --preto: #0A0A0A;
     --azulEscuro: #0A111F;
     --azul: #14213D;
     --cinza: #4F596E;
     --branco: #F5F5F5;
+    --vidro: rgba(255, 255, 255, 0.1);
 }
+
 body {
     background-color: var(--azul);
     color: var(--branco);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.formulario {
-    margin: auto;
-    background-color: var(--azulEscuro);
-    height: 500px;
-    width: 500px;
-    border-radius: 15px;
+
+header {
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
 }
+
+header h1 {
+    font-size: 2rem;
+    color: var(--branco);
+}
+
+header h2 {
+    font-size: 1rem;
+    color: var(--cinza);
+}
+
+form {
+    margin: 2rem auto;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--vidro);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(10, 17, 31, 0.5);
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--branco);
+}
+
+form input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid var(--vidro);
+    color: var(--branco);
+    outline: none;
+}
+
+form input:focus {
+    border: 1px solid var(--cinza);
+    box-shadow: 0 0 10px rgba(79, 89, 110, 0.6);
+}
+
+form button {
+    padding: 1rem 2rem;
+    background-color: var(--cinza);
+    color: var(--branco);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+form button:hover {
+    box-shadow: 0 5px 15px rgba(10, 17, 31, 0.6);
+}
+
 .erro {
-    border: red solid 1px;
+    border: red solid 1px !important;
     outline: none;
 }
+
 .correto {
-    border: green solid 1px;
+    border: green solid 1px !important;
     outline: none;
+}
+
+.particulas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.4;
+    background: radial-gradient(circle at 10% 20%, var(--azulEscuro) 0%, transparent 20%), radial-gradient(circle at 90% 80%, var(--cinza) 0%, transparent 20%), var(--preto);
 }
