@@ -25,14 +25,14 @@ formulario.addEventListener("submit", function (event) {
 document.getElementById("nome").addEventListener("blur", validarNome);
 document.getElementById("nome").addEventListener("keyup", validarNome);
 
-document.getElementById("cidade").addEventListener("blur", validarEndereco);
-document.getElementById("cidade").addEventListener("keyup", validarEndereco);
+document.getElementById("cidade").addEventListener("blur", validarCidade);
+document.getElementById("cidade").addEventListener("keyup", validarCidade);
 
-document.getElementById("bairro").addEventListener("blur", validarEndereco);
-document.getElementById("bairro").addEventListener("keyup", validarEndereco);
+document.getElementById("bairro").addEventListener("blur", validarBairro);
+document.getElementById("bairro").addEventListener("keyup", validarBairro);
 
-document.getElementById("rua").addEventListener("blur", validarEndereco);
-document.getElementById("rua").addEventListener("keyup", validarEndereco);
+document.getElementById("rua").addEventListener("blur", validarRua);
+document.getElementById("rua").addEventListener("keyup", validarRua);
 
 document.getElementById("telefone").addEventListener("blur", validarTelefone);
 document.getElementById("telefone").addEventListener("keyup", validarTelefone);
@@ -40,8 +40,8 @@ document.getElementById("telefone").addEventListener("keyup", validarTelefone);
 document.getElementById("email").addEventListener("blur", validarEmail);
 document.getElementById("email").addEventListener("keyup", validarEmail);
 
-document.getElementById("email").addEventListener("blur", validarCPF);
-document.getElementById("email").addEventListener("keyup", validarCPF);
+document.getElementById("CPF").addEventListener("blur", validarCPF);
+document.getElementById("CPF").addEventListener("keyup", validarCPF);
 
 document.getElementById("nascimento").addEventListener("blur", validarDataNascimento);
 document.getElementById("nascimento").addEventListener("keyup", validarDataNascimento);
@@ -63,17 +63,9 @@ function validarNome() {
     return false;
   } else {
 
-    // números
+    // números e carácteres especiais
     for (let i = 0; i < nome.value.length; i++) {
-      if (numeros.includes(nome.value[i])) {
-        nome.setAttribute("class", "erro");
-        return false;
-      }
-    }
-
-    // caracteres especiais
-    for (let i = 0; i < nome.value.length; i++) {
-      if (especiais.includes(nome.value[i])) {
+      if (numeros.includes(nome.value[i]) || especiais.includes(nome.value[i])) {
         nome.setAttribute("class", "erro");
         return false;
       }
@@ -92,59 +84,80 @@ function validarNome() {
 }
 
 /**
-    Funcao que valida o endereço
+    Funcões que validam o endereço (Ciade, Bairro e Rua)
     Regras:
     Cidade, Bairro e rua não podem ser vazios
     Cidade, Bairro e rua não podem conter números
+    Cidade, Bairro e rua não podem conter carácteres especiais
  */
 
-function validarEndereco() {
+function validarCidade() {
   let cidade = document.getElementById("cidade");
-  let bairro = document.getElementById("bairro");
-  let rua = document.getElementById("rua");
 
   // vazio
-  if (
-    cidade.value.length == 0 ||
-    bairro.value.length == 0 ||
-    rua.value.length == 0
-  ) {
+  if (cidade.value.length == 0) {
     cidade.setAttribute("class", "erro");
-    bairro.setAttribute("class", "erro");
-    rua.setAttribute("class", "erro");
     return false;
   }
 
-  // cidade - números
+  // cidade - números e carácteres especiais
   for (let i = 0; i < cidade.value.length; i++) {
-    if (numeros.includes(cidade.value[i])) {
+    if (numeros.includes(cidade.value[i]) || especiais.includes(cidade.value[i])) {
       cidade.setAttribute("class", "erro");
       return false;
     }
+
   }
 
-  // bairro - números
+  // Tudo certo
+  cidade.setAttribute("class", "correto");
+  return true;
+}
+
+function validarBairro() {
+  let bairro = document.getElementById("bairro");
+
+  //vazio
+  if (bairro.value.length == 0) {
+    bairro.setAttribute("class", "erro");
+    return false;
+  }
+
+  // bairro - números e carácteres especiais
   for (let i = 0; i < bairro.value.length; i++) {
-    if (numeros.includes(bairro.value[i])) {
+    if (numeros.includes(bairro.value[i]) || especiais.includes(bairro.value[i])) {
       bairro.setAttribute("class", "erro");
       return false;
     }
   }
 
-  //rua - números
+  //tudo certo
+  bairro.setAttribute("class", "correto");
+  return true;
+}
+
+function validarRua() {
+  let rua = document.getElementById("rua");
+
+  // vazio
+  if (rua.value.length == 0) {
+    rua.setAttribute("class", "erro");
+    return false;
+  }
+
+  //rua - números e carácteres especiais
   for (let i = 0; i < rua.value.length; i++) {
-    if (numeros.includes(rua.value[i])) {
+    if (numeros.includes(rua.value[i]) || especiais.includes(rua.value[1])) {
       rua.setAttribute("class", "erro");
       return false;
     }
   }
 
   // Tudo certo
-  cidade.setAttribute("class", "correto");
-  bairro.setAttribute("class", "correto");
   rua.setAttribute("class", "correto");
   return true;
 }
+
 /*
     Função que valida telefone
     Regras:
@@ -179,6 +192,7 @@ function validarTelefone() {
   telefone.setAttribute("class", "correto");
   return true;
 }
+
 /*
     Funcao que valida o campo email
     Regras:
@@ -204,6 +218,7 @@ function validarEmail() {
   email.setAttribute("class", "correto");
   return true;
 }
+
 /*
     Funcao que valida o CPF
     Regras:
