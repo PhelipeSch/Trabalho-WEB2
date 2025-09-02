@@ -4,22 +4,26 @@ let especiais = ["!", "@", "#", "$", "%", "¨", "&", "*", "(", ")", "_", "+", "=
 let formulario = document.getElementById("formulario");
 
 // Validar os campos do formulario
-formulario.addEventListener("submit", function (event) {
+formulario.addEventListener("submit", validaForm);
+
+function validaForm(event) {
   let nomeValido = validarNome();
-  let enderecoValido = validarEndereco();
+  let cidadeValida = validarCidade();
+  let bairroValido = validarBairro();
+  let ruaValida = validarRua();
   let telefoneValido = validarTelefone();
   let emailValido = validarEmail();
   let cpfValido = validarCPF();
   let nascimentoValido = validarDataNascimento();
 
   // Se for invalido nao envia
-  if (!nomeValido || !enderecoValido || !telefoneValido || !emailValido || !cpfValido || !nascimentoValido) {
+  if (!nomeValido || !cidadeValida || !bairroValido || !ruaValida || !telefoneValido || !emailValido || !cpfValido || !nascimentoValido) {
     event.preventDefault();
     alert("Por favor, informe todos os dados corretamente.");
   } else {
     alert("Dados válidos, prosseguindo o cadastro.");
   }
-});
+}
 
 // Listeners para validar quando sair do campo
 document.getElementById("nome").addEventListener("blur", validarNome);
